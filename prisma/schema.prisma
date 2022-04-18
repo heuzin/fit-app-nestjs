@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement()) 
+  firstName String
+  lastName  String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  role      Role      @default(USER)
+  profile   Profile?
+  routine   Routine[]
+}
+
+model Profile {
+  id     Int    @default(autoincrement()) @id
+  bio    String
+  weight Int
+  height Int
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+}
+
+model Routine {
+  id        Int       @default(autoincrement()) @id  
+  type      Type?
+  program   Program?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  // sheet Sheet[]
+}
+
+// model Sheet {
+//   id String @id
+//   exercises Exercises[] @relation(references: [id])
+//   routine Routine @relation(fields: [routineId], references: [id])
+//   routineId String
+// }
+
+// model Exercises {
+//   id Int @default(autoincrement()) @id
+//   name String
+//   sets Int
+//   reps Int 
+//   member Member
+//   sheet Sheet[] @relation(references: [id])
+// }
+
+// enum Member {
+//   LEGS
+//   CHEST
+//   BICEPS
+//   TRICEPS
+//   BACK
+//   ABDOMINALS
+// }
+
+enum Type {
+  A
+  B
+  C
+  D
+}
+
+enum Program {
+  PUSH
+  PULL
+  LEGS
+}
+
+enum Role {
+  USER
+  ADMIN
+}

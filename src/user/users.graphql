@@ -1,0 +1,22 @@
+scalar DateTime
+
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  role: Role!
+  profile: Profile
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+}
+
+enum Role {
+  USER
+  ADMIN
+}

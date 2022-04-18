@@ -1,0 +1,20 @@
+type Mutation {
+  signup(createUserInput: CreateUserInput!): User!
+  sigin(authCredentialsInput: AuthCredentialsInput!): Token!
+}
+
+type Token {
+  accessToken: String!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input AuthCredentialsInput {
+  email: String!
+  password: String!
+}

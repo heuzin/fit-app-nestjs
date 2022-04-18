@@ -1,0 +1,22 @@
+type Profile {
+  id: Int!
+  bio: String!
+  weight: Float!
+  height: Float!
+  user: User!
+  userId: Int!
+}
+
+type Query {
+  userProfile: Profile!
+}
+
+type Mutation {
+  createUserProfile(createUserProfileInput: CreateUserProfileInput!): Profile!
+}
+
+input CreateUserProfileInput {
+  bio: String!
+  height: String!
+  weight: String!
+}

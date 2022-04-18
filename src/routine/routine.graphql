@@ -1,0 +1,22 @@
+type Routine {
+  id: Int!
+  type: Type
+  program: Program
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+  userId: Int!
+}
+
+enum Type {
+  A
+  B
+  C
+  D
+}
+
+enum Program {
+  PUSH
+  PULL
+  LEGS
+}
