@@ -23,9 +23,21 @@ export class ProfileService {
     user: User,
     createUserProfileInput: CreateUserProfileInput,
   ): Promise<Profile> {
-    return await this.profileRepository.createUserProfile(
-      user,
-      createUserProfileInput,
-    );
+    const profileExists = await this.profileRepository.profile.findUnique({
+      where: { userId: user.id },
+    });
+
+    if (profileExists) {
+      return await this.profileRepository.updateUserProfile(
+        user,
+        profileExists,
+        createUserProfileInput,
+      );
+    } else {
+      return await this.profileRepository.createUserProfile(
+        user,
+        createUserProfileInput,
+      );
+    }
   }
 }
