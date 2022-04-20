@@ -35,7 +35,6 @@ model Profile {
 model Routine {
   id        Int       @default(autoincrement()) @id  
   type      Type?
-  program   Program?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   user      User      @relation(fields: [userId], references: [id])
@@ -73,9 +72,6 @@ enum Type {
   B
   C
   D
-}
-
-enum Program {
   PUSH
   PULL
   LEGS

@@ -1,7 +1,6 @@
 type Routine {
   id: Int!
-  type: Type
-  program: Program
+  type: Type!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
@@ -13,10 +12,15 @@ enum Type {
   B
   C
   D
-}
-
-enum Program {
   PUSH
   PULL
   LEGS
+}
+
+type Mutation {
+  createRoutine(createRoutineInput: CreateRoutineInput): Routine!
+}
+
+input CreateRoutineInput {
+  type: Type!
 }

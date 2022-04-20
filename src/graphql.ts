@@ -11,10 +11,7 @@ export enum Type {
     A = "A",
     B = "B",
     C = "C",
-    D = "D"
-}
-
-export enum Program {
+    D = "D",
     PUSH = "PUSH",
     PULL = "PULL",
     LEGS = "LEGS"
@@ -43,12 +40,18 @@ export class CreateUserProfileInput {
     weight: string;
 }
 
+export class CreateRoutineInput {
+    type: Type;
+}
+
 export abstract class IMutation {
     abstract signup(createUserInput: CreateUserInput): User | Promise<User>;
 
     abstract sigin(authCredentialsInput: AuthCredentialsInput): Token | Promise<Token>;
 
     abstract createUserProfile(createUserProfileInput: CreateUserProfileInput): Profile | Promise<Profile>;
+
+    abstract createRoutine(createRoutineInput?: Nullable<CreateRoutineInput>): Routine | Promise<Routine>;
 }
 
 export class Token {
@@ -74,8 +77,7 @@ export abstract class IQuery {
 
 export class Routine {
     id: number;
-    type?: Nullable<Type>;
-    program?: Nullable<Program>;
+    type: Type;
     createdAt: DateTime;
     updatedAt: DateTime;
     user: User;
